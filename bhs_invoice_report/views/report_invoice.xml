@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_invoice_sheet_document">
+            <t t-set="o" t-value="o.with_context(lang=lang)"/>
+<!--            <t t-call="web.external_layout">-->
+            <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
+<!--                <link rel="stylesheet" href="/bhs_invoice_report/static/src/css/invoice.css"/>-->
+                <div class="page">
+
+                    <div id="informations" class="row mt-1 mb-auto">
+                        <div class="col-7">
+                            <div>
+                                <img t-attf-src="/web/image/res.company/{{ o.company_id.id }}/logo"
+                                     style="border-style:none;box-sizing:border-box;vertical-align:middle;padding: 0px; margin: 0px; height: auto; width: 108px;margin-left:20px"
+                                      width="80px"/>
+<!--                                 <img src="/bhs_invoice_report/static/description/images/bacha.png" alt="Bac ha Logo"/>-->
+                            </div>
+                            <div class="verdana-10" style="margin-top:50px;">
+                                <div>
+                                    <p style="font-weight:bold;"><span t-if="o.partner_id" class="m-0" t-field="o.partner_id.name"/></p>
+                                </div>
+                                <div>
+                                    <p><span t-if="o.partner_id.street" class="m-0" t-esc="'Address: ' + ', '.join([x for x in [o.partner_shipping_id.street, o.partner_shipping_id.street2, o.partner_shipping_id.city, o.partner_shipping_id.state_id.name, o.partner_shipping_id.country_id.name] if x]) if o.partner_shipping_id else 'Address: '"/></p>
+                                </div>
+
+                                <div>
+                                    <p>Representative: <span t-if="o.partner_shipping_id" class="m-0" t-field="o.partner_shipping_id.name"/></p>
+
+                                </div>
+                                <div>
+                                    <p>Tel: <span t-if="o.partner_shipping_id.phone" class="mr-3" t-field="o.partner_shipping_id.phone"/>  Email: <span style="margin-left:8px;" t-if="o.partner_shipping_id.email" class="m-0" t-field="o.partner_shipping_id.email"/></p>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-5">
+                            <table class="w-100 table-zero-invoice">
+                                <tr>
+                                    <td>
+                                        <div class="title_invoice">
+                                        <h2 style="margin-bottom:20px;">INVOICE</h2>
+                                    </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <div style="margin-bottom:20px;" class="invoice_name">
+                                          <h3 t-if="o.name" class="m-0" t-field="o.name"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p>CUSTOMER NO.</p></td>
+                                    <td class="text-end">
+                                        <div>
+                                          <p t-if="o.partner_id and o.partner_id.customer_code" t-field="o.partner_id.customer_code"/>
+                                          <p t-else="" t-esc="'/'"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p>YOUR REF.</p></td>
+                                    <td class="text-end"><p t-if="o.partner_shipping_id" t-field="o.partner_shipping_id.name"/></td>
+                                </tr>
+                                <tr>
+                                    <td><p>OUR REF.</p></td>
+                                    <td class="text-end"><p>Tran Vu Viet Anh</p></td>
+                                </tr>
+                                <tr>
+                                    <td><p>INVOICE DATE</p></td>
+                                    <td class="text-end">
+                                        <div>
+                                            <p t-if="o.invoice_date" t-esc="o.invoice_date.strftime('%d-%b-%Y')"/>
+                                            <p t-else="" t-esc="'/'"/>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><p>PAYMENT TERMS</p></td>
+                                    <td class="text-end">
+                                        <div>
+                                            <p t-if="o.invoice_payment_term_id " t-field="o.invoice_payment_term_id.name"/>
+                                            <p t-elif="o.invoice_date_due" t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+<!--                        <div class="col-2">-->
+<!--                            <div class="title_invoice">-->
+<!--                                <h2 style="margin-bottom:20px;">INVOICE</h2>-->
+<!--                            </div>-->
+<!--                            <p>CUSTOMER NO.</p>-->
+<!--                            <div>-->
+<!--                                <p>YOUR REF.</p>-->
+<!--                            </div>-->
+<!--                            <p>OUR RRF.</p>-->
+<!--                            <p>INVOICE DATE</p>-->
+<!--                            <p>PAYMENT TERMS</p>-->
+<!--                        </div>-->
+<!--                        <div class="col-3">-->
+<!--                            <div class="text-end">-->
+<!--                                <div style="margin-bottom:20px;" class="invoice_name">-->
+<!--                                  <h3 t-if="o.name" class="m-0" t-field="o.name"/>-->
+<!--                                </div>-->
+
+<!--                                <div>-->
+<!--                                  <p t-if="o.partner_id and o.partner_id.customer_code" t-field="o.partner_id.customer_code"/>-->
+<!--                                  <p t-else="" t-esc="'/'"/>-->
+<!--                                </div>-->
+
+<!--                                <p t-if="o.partner_id" t-field="o.partner_id.name"/>-->
+<!--                                <p>Tran Vu Viet Anh</p>-->
+<!--                                <p t-if="o.invoice_date" t-esc="o.invoice_date.strftime('%d-%b-%Y')"/>-->
+<!--                                <p t-else="" t-esc="'/'"/>-->
+<!--                                <p t-if="o.invoice_payment_term_id " t-field="o.invoice_payment_term_id.name"/>-->
+<!--                                <p t-else="" t-esc="o.invoice_date_due.strftime('%d-%b-%Y')"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                    </div>
+
+<!--                    <div class="invoice-month">-->
+                    <div class="text-center">
+                        <div class="title_invoice">
+                            <h1 style="margin-top:3px">Invoice</h1>
+                        </div>
+                        <div class="verdana-9">
+<!--                            <t t-if="o.invoice_date">-->
+<!--                            <t t-set="month_report" t-value="o.invoice_date"/>-->
+<!--                            </t>-->
+<!--                            <t t-else="">-->
+<!--                                <t t-set="month_report" t-value="datetime.date.today()"/>-->
+<!--                            </t>-->
+                            <p> BH-<span t-esc="dict(o._fields['for_month'].selection).get(o.for_month)"/>/<span t-esc="o.for_year_number"/> </p>
+
+                        </div>
+                    </div>
+
+                    <div class="verdana-9">
+                        <p>
+                            <b>I.Fee of all projects</b>
+                        </p>
+                    </div>
+
+                    <div class="table-first-invoice" style="margin-top:-15px;">
+                        <table class="table table-sm table-bordered-invoice">
+                            <thead>
+                                <tr>
+                                    <th width="15%" scope="col">Items</th>
+                                    <th width="55%" scope="col">Description</th>
+                                    <th width="30%" colspan="2" scope="col">Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <t t-set="list_main_service" t-value="o.sudo().get_list_main_product()"/>
+                                <t t-foreach="list_main_service" t-as="main_service">
+                                    <t t-set="cell_01" t-value="main_service[0]"/>
+                                    <t t-set="cell_02" t-value="main_service[1]"/>
+                                    <t t-set="cell_03" t-value="main_service[2]"/>
+                                    <t t-set="cell_04" t-value="main_service[3]"/>
+                                    <tr>
+                                        <td><span t-esc="cell_01"/></td>
+                                        <td class="text-start"><span t-esc="cell_02"/></td>
+                                        <td><span t-esc="cell_03"/></td>
+                                        <td class="text-end"><span t-esc="cell_04" t-options='{"widget": "float", "precision": 2}'/></td>
+                                    </tr>
+                                </t>
+
+                                <t t-set="data_first_table" t-value="o.sudo().get_data_first_table()"/>
+                                <t t-foreach="data_first_table" t-as="row_table">
+                                    <t t-set="cell_1" t-value="row_table[0]"/>
+                                    <t t-set="cell_2" t-value="row_table[1]"/>
+                                    <t t-set="cell_3" t-value="row_table[2]"/>
+                                    <t t-set="cell_4" t-value="row_table[3]"/>
+                                    <tr>
+                                        <td><span t-esc="cell_1"/></td>
+                                        <td class="text-start"><span t-esc="cell_2"/></td>
+                                        <td><span t-esc="cell_03"/></td>
+                                        <td class="text-end"><span t-esc="cell_4"  t-options='{"widget": "float", "precision":2 }'/></td>
+                                    </tr>
+                                </t>
+
+                                <tr>
+                                    <td/>
+                                    <td class="fw-bold">Total</td>
+                                    <td class="fw-bold"><span t-esc="o.currency_id.name"/></td>
+                                    <td class="fw-bold text-end"><span t-esc="sum(x[-1] for x in data_first_table)+ sum(y[-1] for y in list_main_service)" t-options='{"widget": "float", "precision": 2}'/></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="verdana-10">
+                        <p>
+                            <b>II.Descriptions detail:</b>
+                        </p>
+                    </div>
+
+
+
+                    <div class="table-second-invoice" style="margin-top:-15px;">
+                        <table class="table table-sm table-bordered-invoice">
+                            <thead>
+                                <tr>
+                                    <th width="15%" scope="col">Project</th>
+                                    <th width="55%" scope="col">Description / person</th>
+                                    <th width="15%" scope="col">Time (hours)</th>
+                                    <th width="15%" scope="col">Rates(<t t-esc="o.currency_id.display_name"/>) </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="data_second_table" t-value="o.sudo().get_data_table_second()"/>
+                                <t t-foreach="data_second_table" t-as="row_table2">
+                                    <t t-set="cell_11" t-value="row_table2[0]"/>
+                                    <t t-set="cell_22" t-value="row_table2[1]"/>
+                                    <t t-set="cell_33" t-value="row_table2[2]"/>
+                                    <t t-set="cell_44" t-value="row_table2[3]"/>
+                                    <tr>
+                                        <td>
+                                            <span t-esc="cell_11"/>
+                                        </td>
+                                        <td class="text-start">
+                                            <span t-esc="cell_22"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="cell_33"/>
+                                        </td>
+                                        <td>
+                                            <span t-esc="cell_44"  t-options='{"widget": "float", "precision": 2}'/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                                <tr class="verdana-td-10">
+                                    <td/>
+                                    <td class="fw-bold">Total</td>
+                                    <td class="fw-bold"><span t-esc="sum(x[2] for x in data_second_table)"/></td>
+                                    <td/>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bank-acc">
+<!--                        <p>-->
+<!--                            <b>Bank Account:</b>-->
+<!--                        </p>-->
+<!--                        <t t-if="o.company_id and o.company_id.vat" t-set="tax" t-value="o.company_id.vat"/>-->
+<!--                        <t t-else="" t-set="tax" t-value="'0106653376'"/>-->
+                        <div class="arial-10">
+                            <p>
+                                <b>Bank Account:</b><br/>
+                                <span>Bac Ha Software Co., Ltd. - Tax ID: 0106653376</span>
+                            </p>
+
+                        </div>
+<!--                        <t t-if="o.company_id and o.company_id.zip" t-set="post_code" t-value="o.company_id.zip"/>-->
+<!--                        <t t-else="" t-set="post_code" t-value="11310"/>-->
+                        <t t-if="o.company_id and o.company_id.street" t-set="street1" t-value="o.company_id.street"/>
+                        <t t-else="" t-set="street1" t-value="'6th floor, Technosoft Building, Cau Giay Industrial Zone, Cau Giay District, Hanoi, Vietnam '"/>
+<!--                        <t t-if="o.company_id and o.company_id.street2" t-set="street02" t-value="o.company_id.street2"/>-->
+<!--                        <t t-else="" t-set="street02" t-value="'8 Duy Tan,D29 CauGiay New Urban Area, Cau Giay District, Hanoi'"/>-->
+                        <div class="arial-10" style="margin-top:-10px">
+                            <p>Address: <span t-esc="', '.join([x for x in (o.company_id.street, o.company_id.street2, o.company_id.state_id.name, o.company_id.country_id.name) if x])"/> - Post code:<span t-if="o.company_id and o.company_id.zip" t-field="o.company_id.zip"/> <br/> Contact email: anhtvv@bachasoftware.com</p>
+                        </div>
+<!--                        <p t-esc="street02"/>-->
+<!--                        <p>Post code:<span t-esc="post_code"/></p>-->
+
+<!--                        <t t-if="o.company_id and o.company_id.email" t-set="email" t-value="o.company_id.email"/>-->
+<!--                        <t t-else="" t-set="email" t-value="'anhtvv@bachasoftware.com'"/>-->
+<!--                        <p>Contact email: <span t-esc="email"/></p>-->
+                    </div>
+
+                    <div class="bank-detail arial-10" style="margin-top: -10px;">
+                        <t t-if="o.partner_bank_id and o.partner_bank_id.currency_id" t-set="currency" t-value="o.partner_bank_id.currency_id.name"/>
+                        <t t-else="" t-set="currency" t-value="o.currency_id.name"/>
+                        <p>Bank account:
+                            <span t-if="o.partner_bank_id" t-field="o.partner_bank_id.acc_number"/>(<span t-esc="o.currency_id.display_name"/>)
+                        </p>
+
+                        <t t-if="o.partner_bank_id and o.partner_bank_id.bank_id" t-set="bank_name" t-value="o.partner_bank_id.bank_id.name"/>
+                        <t t-else="" t-set="bank_name" t-value="''"/>
+                        <p>Bank name:
+                            <span t-esc="bank_name"/>
+                        </p>
+
+
+                        <t t-if="o.partner_bank_id and o.partner_bank_id.bank_id and o.partner_bank_id.bank_id.street" t-set="bank_address" t-value="', '.join([x for x in (o.partner_bank_id.bank_id.street, o.partner_bank_id.bank_id.street2,o.partner_bank_id.bank_id.city, o.partner_bank_id.bank_id.state.name, o.partner_bank_id.bank_id.country.name) if x])"/>
+                        <t t-else="" t-set="bank_address" t-value="''"/>
+                        <p>Bank address:
+                            <span t-esc="bank_address"/>
+                        </p>
+
+<!--                        <t t-if="o.partner_bank_id and o.partner_bank_id.bank_id and o.partner_bank_id.bank_id.street2" t-set="bank_address_2" t-value="o.partner_bank_id.bank_id.street2"/>-->
+<!--                        <t t-else="" t-set="bank_address_2" t-value="''"/>-->
+<!--                        <p t-esc="bank_address_2"/>-->
+
+                        <t t-if="o.partner_bank_id and o.partner_bank_id.bank_id and o.partner_bank_id.bank_id.bic" t-set="bank_swift_code" t-value="o.partner_bank_id.bank_id.bic"/>
+                        <t t-else="" t-set="bank_swift_code" t-value="''"/>
+                        <p>SWIFT Code:
+                            <span t-esc="bank_swift_code"/>
+                        </p>
+                    </div>
+
+                    <div class="signature" style="font-weight:bold;">
+                        <div class="verdana-10">
+                             <p>
+                                <b>Bac Ha Software Co., Ltd.</b>
+                             </p>
+                        </div>
+
+                        <div style="margin-left:20px">
+                            <img width="70" height="70" src="/bhs_invoice_report/static/description/images/signature.png" alt="Signature"/>
+                        </div>
+                        <div class="verdana-11">
+                             <p>
+                                <b>Tran Vu Viet Anh</b>
+                             </p>
+                        </div>
+                        <div class="verdana-10">
+                            <p>
+                                <b>Managing Director</b>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </template>
+
+        <template id="report_invoice_sheet" inherit_id="account.report_invoice">
+            <xpath expr="//t[@t-call='account.report_invoice_document']" position="replace">
+                <t t-call="bhs_invoice_report.report_invoice_sheet_document"/>
+            </xpath>
+        </template>
+
+        <record id="paperformat_invoice" model="report.paperformat">
+            <field name="name">Paper for invoice report</field>
+            <field name="default" eval="False" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">30</field>
+            <field name="margin_bottom">40</field>
+            <field name="margin_left">20</field>
+            <field name="margin_right">25</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">30</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="account_invoices" model="ir.actions.report">
+            <field name="name">Invoices sheet form</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">bhs_invoice_report.report_invoice_sheet</field>
+            <field name="report_file">bhs_invoice_report.report_invoice_sheet</field>
+            <field name="print_report_name">(object._get_report_base_filename())</field>
+            <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')
+            </field>
+            <field name="paperformat_id" ref="paperformat_invoice"/>
+            <field name="binding_model_id" ref="model_account_move"/>
+        </record>
+
+
+    </data>
+</odoo>

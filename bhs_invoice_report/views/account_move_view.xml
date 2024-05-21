@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bh_view_move_form" model="ir.ui.view">
+        <field name="name">bh.account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='header_left_group']" position="inside">
+                <field name="eom_accumulation" invisible="1"/>
+                <label string="For" for="for_month" invisible="move_type not in ['out_invoice']"/>
+                <div class="d-flex" invisible="move_type not in ['out_invoice']">
+                    <field name="for_month" readonly="state != 'draft' and invoice_origin != False"/>
+                    <span class="oe_inline o_form_label mr-3 ml-5"> , </span>
+                    <field name="for_year" readonly="state != 'draft' and invoice_origin != False" invisible="1"/>
+                    <field name="for_year_number" readonly="state != 'draft' and invoice_origin != False"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='narration']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">False</attribute>
+                <attribute name="readonly">True</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="options">{"no_create": True}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='amount_residual']" position="after">
+                <field name="currency_id" colspan="2" readonly="1" force_save="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

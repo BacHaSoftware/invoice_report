@@ -1,0 +1,142 @@
+@font-face {
+    font-family: 'verdana';
+    src: url('fonts/verdana-webfont.woff2') format('woff2'),
+         url('fonts/verdana-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'verdana';
+    src: url('fonts/verdana-webfont.woff2') format('woff2'),
+         url('fonts/verdana-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+.table-zero-invoice {
+    border: 0px transparent !important;
+    tr td:last-child {
+        text-align: right !important;
+    }
+}
+
+.table-first-invoice thead th {
+    background-color: #99cc00;
+    color: #030000;
+    text-align:center;
+    font-family:"verdana";
+    font-size:11px;
+}
+
+.table-first-invoice tbody td {
+    background-color: white;
+    color:#030000;
+    text-align:center;
+    font-family:"verdana";
+    font-size:11px;
+}
+
+.table-second-invoice thead th {
+    background-color: #ffcc00;
+    color: #030000;
+    text-align:center;
+    font-family:"verdana";
+    font-size:11px;
+}
+
+.table-second-invoice tbody td {
+    background-color: white;
+    color: #030000;
+    text-align:center;
+    font-family: verdana;
+    font-size:11px;
+}
+
+.table-second-invoice tbody .verdana-td-10 td {
+    font-family:"verdana";
+    font-size:12px;
+}
+
+
+.table-second-invoice {
+    margin-bottom:30px;
+}
+.bank-acc {
+    margin-bottom:10px;
+}
+
+.bank-detail{
+    margin-bottom: 25px;
+}
+.bank-detail p{
+    margin-bottom: -2px;
+}
+.separate {
+    margin-bottom:75px;
+}
+
+table.table-bordered-invoice {
+    border:1px solid #263300;
+    margin-top:20px;
+}
+table.table-bordered-invoice > thead > tr > th{
+    border:1px solid #263300;
+}
+table.table-bordered-invoice > tbody > tr > td{
+    border:1px solid #263300;
+}
+.verdana-10 p {
+    font-family:"verdana";
+    font-size:11px !important;
+    margin-bottom: 2px !important;
+}
+
+#informations p {
+    font-family:"verdana";
+    font-size:9px;
+    margin-bottom:4px;
+}
+.title_invoice h2 {
+    font-family:"verdana";
+    font-size:15px;
+//     margin-bottom:4px;
+    font-weight:bold;
+}
+
+.title_invoice h1 {
+    font-family:"verdana";
+    font-size:22px;
+//     margin-bottom:4px;
+    font-weight:bold;
+    margin-top:20px;
+}
+.invoice_name h3 {
+    font-family:"verdana";
+    font-size:12px;
+//     padding-bottom:7px;
+    font-weight:bold;
+}
+
+.bank-acc p {
+    font-size:10px;
+}
+.signature p {
+    font-size:10px;
+}
+
+.verdana-9 p {
+    font-family:"verdana";
+    font-size:10px;
+    margin-bottom: -2px;
+
+}
+.verdana-11 p{
+    font-family:"verdana";
+    font-size:10px;
+    margin-bottom: 2px;
+}
+.arial-10 p {
+    font-family:verdana;
+    font-size: 11px;
+}
+
