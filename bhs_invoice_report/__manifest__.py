@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'Custom for invoice report',
+    'name': 'Advanced Invoice Configuration',
     'author': 'Bac Ha Software',
     'website': 'https://bachasoftware.com',
     'maintainer': 'Bac Ha Software',

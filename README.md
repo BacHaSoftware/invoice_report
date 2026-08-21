@@ -8,7 +8,7 @@
     <img src="/bhs_invoice_report/static/description/icon.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Custom for invoice report</h3>
+  <h3 align="center">Advanced Invoice Configuration</h3>
 
   <p align="center">
     A product of Bac Ha Software provides comprehensive solutions to email marketing and related problems.
